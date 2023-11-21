@@ -115,6 +115,8 @@ $(function () {
         var scale = 1;
 
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+         // Menambahkan variabel untuk menyimpan jumlah objek terdeteksi
+        let objectCount = 0;
 
         predictions.forEach(function (prediction) {
             const x = prediction.bbox.x;
@@ -143,8 +145,20 @@ $(function () {
                 textWidth + 8,
                 textHeight + 4
             );
+        // });
+        // Increment jumlah objek terdeteksi
+        objectCount++;
         });
 
+        // Menambahkan teks jumlah objek terdeteksi
+        ctx.font = font;
+        ctx.textBaseline = "top";
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillText(
+            `Detected Objects: ${objectCount}`,
+            10, // X position
+            10  // Y position
+        );
         predictions.forEach(function (prediction) {
             const x = prediction.bbox.x;
             const y = prediction.bbox.y;

@@ -115,6 +115,7 @@ $(function () {
         var scale = 1;
 
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        let objectCount = 0;
 
         predictions.forEach(function (prediction) {
             const x = prediction.bbox.x;
@@ -143,7 +144,19 @@ $(function () {
                 textWidth + 8,
                 textHeight + 4
             );
+            // increment the object
+        objectCount++;
         });
+
+        // Menambahkan teks jumlah objek terdeteksi
+        ctx.font = font;
+        ctx.textBaseline = "top";
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillText(
+            `Detected Objects: ${objectCount}`,
+            20, // X position
+            120  // Y position
+        );
 
         predictions.forEach(function (prediction) {
             const x = prediction.bbox.x;
